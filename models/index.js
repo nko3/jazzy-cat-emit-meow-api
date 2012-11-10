@@ -31,7 +31,7 @@ var persistance = {
 var node = {
   // Returns an array of errors or false if a valid node object was passed
   invalid: function(data) {
-    errors = [];
+    var errors = [];
     if (!data.lat) {
       errors.push("A map node must have a lat property. Found " + data.lat || "undefined" + " instead");
     }
