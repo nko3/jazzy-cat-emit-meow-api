@@ -1,0 +1,12 @@
+{
+  "framework": "mocha",
+  "launchers": {
+    "Mocha": {
+        "command": "mocha test/*.js"
+    }
+  },
+  "launch_in_dev": [
+    "Mocha"
+  ],
+  "before_tests": "jshint ."
+}
