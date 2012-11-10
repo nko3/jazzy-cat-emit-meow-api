@@ -1,6 +1,11 @@
 /*globals Map:true*/
 var resourceful = require('resourceful'),
-    cqs = require('../cqs');
+    // explicit async require
+    msg_q = require('../cqs')(function(queue) {
+      msg_q = queue;
+    });
+
+
 
 // TODO: Use the database var once we're done main development
 //var database = (process.env.NODE_ENV === 'production') ? 'prod' : 'testdb';
@@ -12,13 +17,8 @@ var Map = resourceful.define('map', function() {
 
   this.string('name');
 
-  this.after('save', function() {
-    console.log("After save arguments ", arguments);
-  });
-
-
+  bindHooks(this);
 });
-
 
 var Contribution = resourceful.define('contribution', function() {
 
@@ -28,10 +28,7 @@ var Contribution = resourceful.define('contribution', function() {
 
   this.parent('map');
 
-  this.after('save', function() {
-    console.log("After save arguments ", arguments);
-  });
-
+  bindHooks(this);
 });
 
 
@@ -39,3 +36,28 @@ module.exports = {
   Map: Map,
   Contribution: Contribution
 };
+
+
+function bindHooks(self) {
+  ['create', 'update', 'destroy'].forEach(function(eventName) {
+    var handler = function(err, obj) {
+      if (!err) {
+        // build the msg for this event
+        var newMsg = {
+          modelType: obj.resource,
+          modelData: obj,
+          action: eventName
+        };
+        msg_q.send(newMsg, function(err, message) {
+          if (!err) {
+            //console.log('Sent:', newMsg);
+          } else {
+            console.error("Error sending new message:", newMsg);
+          }
+        });
+      }
+      return true;
+    };
+    self.after(eventName, handler);
+  });
+}
