@@ -11,5 +11,8 @@
     "url": "git://github.com/nko3/jazzy-cat-emit-meow-api.git"
   },
   "author": "Henry, Jesee, Todd, Zeus",
-  "license": "BSD"
+  "license": "BSD",
+  "dependencies": {
+    "node-redis": "~0.1.5"
+  }
 }
