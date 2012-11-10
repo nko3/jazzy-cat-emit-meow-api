@@ -11,22 +11,22 @@ describe('models', function () {
     require('../models').should.exist;
   });
 
-  describe('map', function () {
+  describe('Map', function () {
     it('should exist', function () {
-      require('../models').map.should.exist;
+      require('../models').Map.should.exist;
     });
 
     it('should have a schema', function () {
-      require('../models').map.schema.should.exist;
+      require('../models').Map.schema.should.exist;
     });
 
     it('should have a name', function () {
-      require('../models').map.schema.properties.name.should.exist;
+      require('../models').Map.schema.properties.name.should.exist;
     });
 
     describe('instance', function () {
       it('should be created', function () {
-        this.instance = require('../models').map.new({
+        this.instance = require('../models').Map.new({
           name: 'test'
         });
       });
@@ -35,62 +35,59 @@ describe('models', function () {
         this.instance.name.should.equal('test');
       });
 
-      it('should save into the testdb', function () {
-        this.instance.save();
+      it('should save into the testdb', function (done) {
+        this.instance.save(done);
       });
 
-      it('should save into the testdb async', function (done) {
-        this.instance.save(function (hey, yo) {
-          console.log(hey, yo);
-          done();
-        });
-      });
-
-      it('should update to test2', function () {
+      it('should update to test2', function (done) {
         this.instance.update({
           name: 'test2'
+        }, function (err, updated) {
+          done(err);
         });
       });
 
-      it('should be named test2', function () {
-        this.instance.reload();
-        this.instance.name.should.equal('test2');
+      it('should be named test2', function (done) {
+        this.instance.reload(function (err, instance) {
+          instance.name.should.be.equal('test2');
+          done(err);
+        });
       });
 
-      it('should be destroyed!', function () {
-        this.instance.destroy();
+      it('should be destroyed!', function (done) {
+        this.instance.destroy(done);
       });
     });
   });
 
-  describe('contribution', function () {
+  describe('Contribution', function () {
     it('should exist', function () {
-      require('../models').contribution.should.exist;
+      require('../models').Contribution.should.exist;
     });
 
     it('should have a schema', function () {
-      require('../models').contribution.schema.should.exist;
+      require('../models').Contribution.schema.should.exist;
     });
 
     it('should have a lat', function () {
-      require('../models').contribution.schema.properties.lat.should.exist;
+      require('../models').Contribution.schema.properties.lat.should.exist;
     });
 
     it('should have a long', function () {
-      require('../models').contribution.schema.properties.long.should.exist;
+      require('../models').Contribution.schema.properties.long.should.exist;
     });
 
     it('should have a meta', function () {
-      require('../models').contribution.schema.properties.meta.should.exist;
+      require('../models').Contribution.schema.properties.meta.should.exist;
     });
 
     it('should have a map ref', function () {
-      require('../models').contribution.schema.properties.map_id.should.exist;
+      require('../models').Contribution.schema.properties.map_id.should.exist;
     });
 
     describe('instance', function () {
       it('should be created', function () {
-        this.instance = require('../models').contribution.new({
+        this.instance = require('../models').Contribution.new({
           lat: '26.2',
           long: '34.4',
           meta: {
@@ -103,30 +100,25 @@ describe('models', function () {
         this.instance.lat.should.equal('26.2');
       });
 
-      it('should save into the testdb', function () {
-        this.instance.save();
+      it('should save into the testdb', function (done) {
+        this.instance.save(done);
       });
 
-      it('should save into the testdb async', function (done) {
-        this.instance.save(function (hey, yo) {
-          console.log(hey, yo);
-          done();
-        });
-      });
-
-      it('should update to 26.3', function () {
+      it('should update to 26.3', function (done) {
         this.instance.update({
           lat: '26.3'
+        }, done);
+      });
+
+      it('should be 26.3', function (done) {
+        this.instance.reload(function (err, instance) {
+          instance.lat.should.equal('26.3');
+          done(err);
         });
       });
 
-      it('should be 26.3', function () {
-        this.instance.reload();
-        this.instance.lat.should.equal('26.3');
-      });
-
-      it('should be destroyed!', function () {
-        this.instance.destroy();
+      it('should be destroyed!', function (done) {
+        this.instance.destroy(done);
       });
     });
   });
