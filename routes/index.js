@@ -8,13 +8,13 @@ var models = require('../models'),
 // Route: /:mapper/node
 var postContribution = function(req, res, next) {
   var params = req.params;
-  console.log(params);
+
   Map.createContribution(params.mapper, params, function(err, obj) {
     if (err) {
       console.log("ERROR", err);
       next(err);
     } else {
-      console.log("Created a Contribution with the following props: ", obj);
+      //console.log("Created a Contribution with the following props: ", obj);
       res.send(obj);
       next();
     }
