@@ -26,7 +26,7 @@ var postMapper = function(req, res, next) {
   // A map's name is it's ID. TODO: Add formal name later
   var newMap = {
     id: params.mapper,
-    name: params.mapper
+    name: params.formal_name || params.mapper
   };
   Map.create(newMap, function(err, obj) {
     if (err) {
