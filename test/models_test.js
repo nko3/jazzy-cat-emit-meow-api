@@ -42,6 +42,40 @@ describe('models', function () {
           long: '2'
         }).should.be['false'];
       });
+
+      it('should not return false not long', function () {
+        require('../models').node.invalid({
+          lat: '1'
+        }).should.not.be['false'];
+      });
+
+      it('should not return false not lat', function () {
+        require('../models').node.invalid({
+          long: '1'
+        }).should.not.be['false'];
+      });
+    });
+
+    describe('create', function () {
+      it('should exist', function () {
+        require('../models').node.create.should.exist;
+      });
+
+      it('should return on error', function (done) {
+        require('../models').node.create({}, function (errors) {
+          errors.should.be.a('array');
+          done();
+        });
+      });
+
+      it('should return on good data', function (done) {
+        require('../models').node.create({
+          lat: '1',
+          long: '2'
+        }, function () {
+          done();
+        });
+      });
     });
   });
 

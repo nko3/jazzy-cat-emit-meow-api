@@ -9,7 +9,9 @@
     "Mocha"
   ],
   "src_files": [
-    "test/*.js"
+    "test/*.js",
+    "models/*.js",
+    "*.js"
   ],
   "before_tests": "jshint ."
 }
