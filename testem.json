@@ -8,5 +8,8 @@
   "launch_in_dev": [
     "Mocha"
   ],
+  "src_files": [
+    "test/*.js"
+  ],
   "before_tests": "jshint ."
 }
