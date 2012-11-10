@@ -8,6 +8,7 @@ var models = require('../models'),
 postContribution = function(req, res, next) {
   var params = req.params;
   var body = req.body;
+  console.log("BODY: ", body, params);
   Map.createContribution(params.mapper, req.body, function(err, obj) {
     if (err) {
       console.log("ERROR", err);
