@@ -1,0 +1,15 @@
+{
+  "name": "jazzycat-emit-meow-api",
+  "version": "0.0.0",
+  "description": "Mapper-Maker API",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nko3/jazzy-cat-emit-meow-api.git"
+  },
+  "author": "Henry, Jesee, Todd, Zeus",
+  "license": "BSD"
+}
