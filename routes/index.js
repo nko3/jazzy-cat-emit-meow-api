@@ -8,7 +8,7 @@ var models = require('../models'),
 // Route: /:mapper/node
 var postContribution = function(req, res, next) {
   var params = req.params;
-
+  console.log(params);
   Map.createContribution(params.mapper, params, function(err, obj) {
     if (err) {
       console.log("ERROR", err);
@@ -34,7 +34,7 @@ var postMapper = function(req, res, next) {
       console.log("ERROR", err);
       next(err);
     } else {
-      console.log("Created a Map with the following props: ", obj);
+      //console.log("Created a Map with the following props: ", obj);
       res.send(obj);
       next();
     }
@@ -49,7 +49,7 @@ var getMapper = function(req, res, next) {
       console.log("Error", err);
       next(err);
     } else {
-      console.log("Fetching Nodes for Map: ", params.mapper);
+      //console.log("Fetching Nodes for Map: ", params.mapper);
       res.send(contributions);
       next();
     }
@@ -63,7 +63,7 @@ var getRoot = function(req, res, next) {
       console.log("ERROR: ", err);
       next(err);
     } else {
-      console.log("Fetching a list of all available maps", maps);
+      //console.log("Fetching a list of all available maps", maps);
       res.send(maps);
       next();
     }

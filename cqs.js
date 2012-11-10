@@ -8,6 +8,6 @@ module.exports = cqs = cqs.defaults({
 // Just create with a name.
 cqs.CreateQueue("mapper_message_queue", function(error, queue) {
   if(!error) {
-    console.log("The Mapper Queue has been started.");
+    //console.log("The Mapper Queue has been started.");
   }
 });

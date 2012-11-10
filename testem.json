@@ -11,6 +11,7 @@
   "src_files": [
     "test/*.js",
     "models/*.js",
+    "routes/*.js",
     "*.js"
   ],
   "before_tests": "jshint ."
