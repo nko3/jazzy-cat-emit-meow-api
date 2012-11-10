@@ -67,7 +67,6 @@ describe('server', function () {
         if (error) {
           return done(error);
         }
-        console.log(body);
         body.should.be.a('object');
         return done();
       });
