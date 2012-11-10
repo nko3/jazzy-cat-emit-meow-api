@@ -9,7 +9,7 @@ postContribution = function(req, res, next) {
   var params = req.params;
   var body = req.body;
   console.log("BODY: ", body, params);
-  Map.createContribution(params.mapper, req.body, function(err, obj) {
+  Map.createContribution(params.mapper, body, function(err, obj) {
     if (err) {
       console.log("ERROR", err);
       next(err);
@@ -24,7 +24,7 @@ postContribution = function(req, res, next) {
 // Route: /:mapper
 postMapper = function(req, res, next) {
   var params = req.params;
-  Map.create({name: params.mapper}, function(err, obj) {
+  Map.create({name: params.mapper, id: params.mapper}, function(err, obj) {
     if (err) {
       console.log("ERROR", err);
       next(err);
