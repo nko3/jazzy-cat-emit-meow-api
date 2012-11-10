@@ -37,7 +37,7 @@ module.exports = {
   Contribution: Contribution
 };
 
-
+// Binds hooks that deal with publishing messages through CQS
 function bindHooks(self) {
   ['create', 'update', 'destroy'].forEach(function(eventName) {
     var handler = function(err, obj) {
