@@ -1,3 +1,4 @@
+/*globals Map:true*/
 var models = require('../models'),
     Map = models.Map,
     Contribution = models.Contribution;
@@ -6,9 +7,9 @@ var models = require('../models'),
 
 // Route: /:mapper/node
 var postContribution = function(req, res, next) {
-  var params = req.params,
-      body = JSON.parse(req.body);
-  Map.createContribution(params.mapper, body, function(err, obj) {
+  var params = req.params;
+
+  Map.createContribution(params.mapper, req.body, function(err, obj) {
     if (err) {
       console.log("ERROR", err);
       next(err);
