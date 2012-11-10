@@ -1,6 +1,6 @@
-var redis = require('./redisClient');
-  
-node = {
+var redis = require('../redisClient');
+
+var node = {
   // Returns an array of errors or false if a valid node object was passed
   invalid: function(data) {
     errors = [];
@@ -43,7 +43,7 @@ node = {
   }
 };
 
-map = {
+var map = {
 
   validate: function(data) {
 
@@ -55,7 +55,7 @@ map = {
   },
 
   retrieve: function(data, cb) {
-  
+
   },
 
   update: function(data, cb) {
