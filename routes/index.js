@@ -6,9 +6,8 @@ var models = require('../models'),
 
 // Route: /:mapper/node
 var postContribution = function(req, res, next) {
-  var params = req.params;
-  var body = req.body;
-  console.log("BODY: ", body, params);
+  var params = req.params,
+      body = JSON.parse(req.body);
   Map.createContribution(params.mapper, body, function(err, obj) {
     if (err) {
       console.log("ERROR", err);
@@ -24,7 +23,12 @@ var postContribution = function(req, res, next) {
 // Route: /:mapper
 var postMapper = function(req, res, next) {
   var params = req.params;
-  Map.create({name: params.mapper, id: params.mapper}, function(err, obj) {
+  // A map's name is it's ID. TODO: Add formal name later
+  var newMap = {
+    id: params.mapper,
+    name: params.mapper
+  };
+  Map.create(newMap, function(err, obj) {
     if (err) {
       console.log("ERROR", err);
       next(err);
