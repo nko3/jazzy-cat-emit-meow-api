@@ -3,6 +3,6 @@ require('chai').should();
 
 describe('routes', function () {
   it('should not blow up', function () {
-    require('../routes');
+    console.log(require('../routes'));
   });
 });
