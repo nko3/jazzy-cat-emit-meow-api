@@ -88,8 +88,8 @@ describe('models', function () {
     describe('instance', function () {
       it('should be created', function () {
         this.instance = require('../models').Contribution.new({
-          lat: '26.2',
-          long: '34.4',
+          lat: 26.2,
+          long: 34.4,
           meta: {
             test: true
           }
@@ -97,7 +97,7 @@ describe('models', function () {
       });
 
       it('should have latitude 26.2', function () {
-        this.instance.lat.should.equal('26.2');
+        this.instance.lat.should.equal(26.2);
       });
 
       it('should save into the testdb', function (done) {
@@ -106,13 +106,13 @@ describe('models', function () {
 
       it('should update to 26.3', function (done) {
         this.instance.update({
-          lat: '26.3'
+          lat: 26.3
         }, done);
       });
 
       it('should be 26.3', function (done) {
         this.instance.reload(function (err, instance) {
-          instance.lat.should.equal('26.3');
+          instance.lat.should.equal(26.3);
           done(err);
         });
       });

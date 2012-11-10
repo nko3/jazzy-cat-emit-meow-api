@@ -58,8 +58,8 @@ describe('server', function () {
 
     it('should respond to post /test/node/', function (done) {
       post('/test/node/', {
-        lat: '3.4',
-        long: '5.6',
+        lat: 3.4,
+        long: 5.6,
         meta: {
           test: true
         }
@@ -75,8 +75,8 @@ describe('server', function () {
     it('should respond to post /test/contribution/',
       function (done) {
       post('/test/contribution/', {
-        lat: '3.4',
-        long: '5.6',
+        lat: 3.4,
+        long: 5.6,
         meta: {
           test: true
         }
