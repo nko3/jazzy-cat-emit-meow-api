@@ -22,8 +22,8 @@ var Map = resourceful.define('map', function() {
 
 var Contribution = resourceful.define('contribution', function() {
 
-  this.string('lat');
-  this.string('long');
+  this.number('lat');
+  this.number('long');
   this.object('meta');
 
   this.parent('map');
