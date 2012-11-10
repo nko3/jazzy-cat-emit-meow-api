@@ -5,7 +5,7 @@ var models = require('../models'),
 
 
 // Route: /:mapper/node
-postContribution = function(req, res, next) {
+var postContribution = function(req, res, next) {
   var params = req.params;
   var body = req.body;
   console.log("BODY: ", body, params);
@@ -22,7 +22,7 @@ postContribution = function(req, res, next) {
 };
 
 // Route: /:mapper
-postMapper = function(req, res, next) {
+var postMapper = function(req, res, next) {
   var params = req.params;
   Map.create({name: params.mapper, id: params.mapper}, function(err, obj) {
     if (err) {
@@ -37,7 +37,7 @@ postMapper = function(req, res, next) {
 };
 
 // Route: /:mapper
-getMapper = function(req, res, next) {
+var getMapper = function(req, res, next) {
   var params = req.params;
   Map.contributions(params.mapper, function(err, contributions) {
     if (err) {
@@ -52,7 +52,7 @@ getMapper = function(req, res, next) {
 };
 
 // Route: /
-getRoot = function(req, res, next) {
+var getRoot = function(req, res, next) {
   Map.all(function(err, maps) {
     if (err) {
       console.log("ERROR: ", err);
