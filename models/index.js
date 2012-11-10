@@ -1,4 +1,5 @@
-var resourceful = require('resourceful');
+var resourceful = require('resourceful'),
+    cqs = require('../cqs');
 
 resourceful.use('couchdb', 'couchdb://nodejitsudb7300738890.iriscouch.com:5984/testdb');
 
