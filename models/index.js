@@ -1,5 +1,33 @@
 var redis = require('../redisClient');
 
+var persistance = {
+
+  create: function(namespace, data, cb) {
+    // get the next id
+    // create the object
+    // add it to the namespace list
+    // publish a create event
+    // return the object
+  },
+
+  retrieve: function(namespace, data, cb) {
+    // get the object
+    // return it
+  },
+
+  update: function(namespace, data, cb) {
+    // update
+    // publish update event
+  },
+
+  del: function(namespace, data, cb) {
+    // delete
+    // publish delete event
+    // remove it from the namespace list
+  }
+};
+
+
 var node = {
   // Returns an array of errors or false if a valid node object was passed
   invalid: function(data) {
