@@ -1,5 +1,5 @@
 var http = require('http'),
-    routes = require('./routes'),
+    bindRoutes = require('./routes'),
     version = require('./package').version,
     sugar = require('sugar'),
     restify = require('restify');
@@ -20,6 +20,7 @@ server.get('/echo/:name', function (req, res, next) {
   return next();
 });
 
+bindRoutes(server);
 
 server.listen(process.env.PORT || 2000, function () {
   console.log('%s listening at %s', server.name, server.url);
