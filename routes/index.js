@@ -11,7 +11,7 @@ var postContribution = function(req, res, next) {
 
   Map.createContribution(params.mapper, params, function(err, obj) {
     if (err) {
-      console.log("ERROR", err);
+      console.error("ERROR", err);
       next(err);
     } else {
       //console.log("Created a Contribution with the following props: ", obj);
@@ -31,7 +31,7 @@ var postMapper = function(req, res, next) {
   };
   Map.create(newMap, function(err, obj) {
     if (err) {
-      console.log("ERROR", err);
+      console.error("ERROR", err);
       next(err);
     } else {
       //console.log("Created a Map with the following props: ", obj);
@@ -46,7 +46,7 @@ var getMapper = function(req, res, next) {
   var params = req.params;
   Map.contributions(params.mapper, function(err, contributions) {
     if (err) {
-      console.log("Error", err);
+      console.error("Error", err);
       next(err);
     } else {
       //console.log("Fetching Nodes for Map: ", params.mapper);
@@ -60,7 +60,7 @@ var getMapper = function(req, res, next) {
 var getRoot = function(req, res, next) {
   Map.all(function(err, maps) {
     if (err) {
-      console.log("ERROR: ", err);
+      console.error("ERROR: ", err);
       next(err);
     } else {
       //console.log("Fetching a list of all available maps", maps);
