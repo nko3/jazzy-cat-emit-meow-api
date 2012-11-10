@@ -24,7 +24,7 @@ describe('models', function () {
       require('../models').map.schema.properties.name.should.exist;
     });
 
-    describe('instance', function () {
+    /*describe('instance', function () {
       it('should be created', function () {
         this.instance = require('../models').map.new({
           name: 'test'
@@ -60,7 +60,7 @@ describe('models', function () {
       it('should be destroyed!', function () {
         this.instance.destroy();
       });
-    });
+    });*/
   });
 
   describe('contribution', function () {
@@ -88,7 +88,7 @@ describe('models', function () {
       require('../models').contribution.schema.properties.map_id.should.exist;
     });
 
-    describe('instance', function () {
+    /*describe('instance', function () {
       it('should be created', function () {
         this.instance = require('../models').contribution.new({
           lat: '26.2',
@@ -128,6 +128,6 @@ describe('models', function () {
       it('should be destroyed!', function () {
         this.instance.destroy();
       });
-    });
+    });*/
   });
 });
