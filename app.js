@@ -1,6 +1,7 @@
 var http = require('http'),
     routes = require('./routes'),
     version = require('./package').version,
+    sugar = require('sugar'),
     restify = require('restify');
 
 
@@ -13,6 +14,7 @@ server.use(restify.acceptParser(server.acceptable));
 server.use(restify.queryParser());
 server.use(restify.bodyParser());
 
+// Debug Route
 server.get('/echo/:name', function (req, res, next) {
   res.send(req.params);
   return next();
