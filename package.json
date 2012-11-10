@@ -13,6 +13,7 @@
   "author": "Henry, Jesee, Todd, Zeus",
   "license": "BSD",
   "dependencies": {
-    "node-redis": "~0.1.5"
+    "node-redis": "~0.1.5",
+    "restify": "~1.4.4"
   }
 }
