@@ -20,6 +20,8 @@ var Contribution = resourceful.define('contribution', function() {
   this.object('meta');
   this.timestamps();
 
+  // Creates a filter that allows us to search
+  // for a contribution by its keyword
   this.filter('byKeyword', {
     map: function(doc) {
       if (doc.resource === 'Contribution' && doc.keywords) {
@@ -30,6 +32,8 @@ var Contribution = resourceful.define('contribution', function() {
     }
   });
 
+  // Creates a filter that returns an array of 
+  // {keyword -> count} objects
   this.filter('allKeywords', {group: true}, {
     map: function(doc) {
       if (doc.resource === 'Contribution' && doc.keywords) {
