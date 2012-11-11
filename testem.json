@@ -2,7 +2,7 @@
   "framework": "mocha",
   "launchers": {
     "Mocha": {
-        "command": "mocha -t 5000 test/*.js"
+        "command": "mocha -t 5000 test/*.js -R spec"
     }
   },
   "launch_in_dev": [

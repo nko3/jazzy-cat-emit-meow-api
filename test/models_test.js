@@ -32,11 +32,16 @@ describe('models', function () {
       require('../models').Contribution.schema.properties.meta.should.exist;
     });
 
+    it('should have a keywords', function () {
+      require('../models').Contribution.schema.properties.keywords.should.exist;
+    });
+
     describe('instance', function () {
       it('should be created', function () {
         this.instance = require('../models').Contribution.new({
           lat: 26.2,
           long: 34.4,
+          keywords: ['test', 'api'],
           meta: {
             test: true
           }
@@ -45,6 +50,10 @@ describe('models', function () {
 
       it('should have latitude 26.2', function () {
         this.instance.lat.should.equal(26.2);
+      });
+
+      it('should have keywords', function () {
+        this.instance.keywords[0].should.equal('test');
       });
 
       it('should save into the testdb', function (done) {
