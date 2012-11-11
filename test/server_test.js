@@ -85,7 +85,7 @@ describe('server', function () {
     describe('get /keyword', function () {
       it('should give keywords', function (done) {
         get('/keyword', function (data) {
-          console.error(data);
+          data.should.be.a('array');
           done();
         });
       });
