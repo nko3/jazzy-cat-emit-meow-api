@@ -95,9 +95,7 @@ var postContribution = function(req, res, next) {
 
 // Route: GET /keyword
 var getKeywords = function(req, res, next) {
-  console.error('mike');
   Contribution.allKeywords(function(err, keywords) {
-    console.error('bob');
     if (err) {
       console.error("ERROR while retrieving all keywords", err);
       next(err);
