@@ -20,8 +20,6 @@ var Contribution = resourceful.define('contribution', function() {
   this.object('meta');
   this.timestamps();
 
-  //this.parent('map');
-
   this.filter('byKeyword', {
     map: function(doc) {
       if (doc.resource === 'Contribution' && doc.keywords) {
@@ -30,9 +28,6 @@ var Contribution = resourceful.define('contribution', function() {
         });
       }
     }
-    //reduce: function(keys, values) {
-      //return true;
-    //}
   });
 
   this.filter('allKeywords', {group: true}, {
