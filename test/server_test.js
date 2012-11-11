@@ -39,7 +39,7 @@ describe('server', function () {
     describe('get /', function () {
       it('should give commands', function (done) {
         get('/', function (data) {
-          data.search.should.exist;
+          data.getKeywords.should.exist;
           done();
         });
       });
