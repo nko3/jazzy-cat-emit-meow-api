@@ -6,12 +6,11 @@ var resourceful = require('resourceful'),
     });
 
 
-
 // TODO: Use the database var once we're done main development
 //var database = (process.env.NODE_ENV === 'production') ? 'prod' : 'testdb';
 
 resourceful.use('couchdb',
-  'couchdb://nodejitsudb7300738890.iriscouch.com:5984/testdb');
+  'couchdb://nodejitsudb7300738890.iriscouch.com:5984/testdb2');
 
 var Map = resourceful.define('map', function() {
 
@@ -23,13 +22,58 @@ var Map = resourceful.define('map', function() {
 var Contribution = resourceful.define('contribution', function() {
 
   this.number('lat');
-  this.number('long');
+  this.number('lng');
+  this.array('keywords');
   this.object('meta');
 
-  this.parent('map');
+  //this.parent('map');
+
+  this.filter('byKeyword', {
+    map: function(doc) {
+      if (doc.resource === 'Contribution' && doc.keywords) {
+        doc.keywords.forEach(function(keyword) {
+          emit(keyword, doc);
+        });
+      }
+    }
+    //reduce: function(keys, values) {
+      //return true;
+    //}
+  });
+
+  this.filter('allKeywords', {group: true}, {
+    map: function(doc) {
+      if (doc.resource === 'Contribution' && doc.keywords) {
+        doc.keywords.forEach(function(keyword) {
+          emit(keyword, 1);
+        });
+      }
+    },
+
+    reduce: function(keys, values) {
+      return sum(values);
+    }
+
+  });
 
   bindHooks(this);
 });
+
+
+
+
+/*  TEST SCRIPTS .. LEFT HERE FOR HENRY SO HE CAN SEE HOW TO USE THE FILTERS.
+
+  Contribution.byKeyword({keys: ['corn', 'tacos']}, function(err, docs) {
+    console.log(err, docs);
+  });
+
+  Contribution.allKeywords(function(err, docs) {
+    console.log(err, docs);
+  });
+
+*/
+
 
 
 module.exports = {
