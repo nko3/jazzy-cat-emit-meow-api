@@ -4,77 +4,95 @@ var models = require('../models'),
     Contribution = models.Contribution;
 
 
+// PUBLIC API DESCRIPTION  that's returned on GET /
+var commands = {
+  search: {
+    url: 'GET /search?:keyword1&:keyword2...',
+    description: 'Search for contributions by keyword. Here you can define as many keywords as you would like'
+  },
+  getContributions: {
+    url: 'GET /contribution',
+    description: 'returns all contributions'
+  },
+  getContributionsByKeyword: {
+    url: 'GET /contribution/:keyword',
+    description: 'return all contributions for the provided keyword. NOTE: Only a single keyword is accepted'
+  },
+  createContribution: {
+    url: 'POST /contribution',
+    description: 'create a new contribution',
+    post_body_template: {
+      keywords: "['keywrd1', 'keywrd two']",
+      lat: 1.12313131,
+      lng: -1.2112312,
+      'meta': '{ JSON Object. This is an optional property }'
+    }
+  }
+};
 
-// Route: /:mapper/node
+var getHelp = function(req, res, next) {
+  res.send(commands);
+  next();
+};
+
+var getContributions = function(req, res, next) {
+  Contribution.all(function(err, contribs) {
+    if (err) {
+      console.error("Error while retrieving contribs: ", err);
+      next(err);
+    } else {
+      res.send(contribs);
+      next();
+    }
+  });
+};
+
+
+var getContributionsByKeyword = function(req, res, next) {
+  var query = {},
+      isMultiKeywordQuery = false,
+      params = req.params;
+
+  if (params.keyword) {
+    // A single keyword query
+    query.key = params.keyword;
+  } else {
+    // multi-keyword query
+    isMultiKeywordQuery = true;
+    query.keys = Object.keys(params);
+  }
+  Contribution.byKeyword(query, function(err, contribs) {
+    if (err) {
+      console.error("Error while retrieiving contribs with query: ", query, err);
+      next(err);
+    } else {
+      if (isMultiKeywordQuery) {
+        // Multi-Keyword queries will return duplicate objects
+        res.send(contribs.unique());
+      } else {
+        res.send(contribs);
+      }
+      next();
+    }
+  });
+};
+
+
 var postContribution = function(req, res, next) {
-  var params = req.params;
-
-  Map.createContribution(params.mapper, params, function(err, obj) {
+  Contribution.create(req.params, function(err, contrib) {
     if (err) {
-      console.error("ERROR", err);
+      console.error("ERROR while creating a contribution with params: ", req.params, err);
       next(err);
     } else {
-      //console.log("Created a Contribution with the following props: ", obj);
-      res.send(obj);
+      res.send(contrib);
       next();
     }
   });
 };
-
-// Route: /:mapper
-var postMapper = function(req, res, next) {
-  var params = req.params;
-  // A map's name is it's ID. TODO: Add formal name later
-  var newMap = {
-    id: params.mapper,
-    name: params.formal_name || params.mapper
-  };
-  Map.create(newMap, function(err, obj) {
-    if (err) {
-      console.error("ERROR", err);
-      next(err);
-    } else {
-      //console.log("Created a Map with the following props: ", obj);
-      res.send(obj);
-      next();
-    }
-  });
-};
-
-// Route: /:mapper
-var getMapper = function(req, res, next) {
-  var params = req.params;
-  Map.contributions(params.mapper, function(err, contributions) {
-    if (err) {
-      console.error("Error", err);
-      next(err);
-    } else {
-      //console.log("Fetching Nodes for Map: ", params.mapper);
-      res.send(contributions);
-      next();
-    }
-  });
-};
-
-// Route: /
-var getRoot = function(req, res, next) {
-  Map.all(function(err, maps) {
-    if (err) {
-      console.error("ERROR: ", err);
-      next(err);
-    } else {
-      //console.log("Fetching a list of all available maps", maps);
-      res.send(maps);
-      next();
-    }
-  });
-};
-
 
 module.exports = function bindRoutes (server) {
-  server.get('/', getRoot);
-  server.get('/:mapper', getMapper);
-  server.post('/:mapper', postMapper);
-  server.post('/:mapper/node', postContribution);
-  server.post('/:mapper/contribution', postContribution);
+  server.get('/', getHelp);
+  server.get('/contribution', getContributions);
+  server.get('contribution/:keyword', getContributionsByKeyword);
+  server.get('/search', getContributionsByKeyword);
 };
