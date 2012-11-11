@@ -20,7 +20,7 @@
   "dependencies": {
     "restify": "~1.4.4",
     "sugar": "~1.3.6",
-    "resourceful": "~0.3.2",
+    "resourceful": "git://github.com/distracteddev/resourceful.git",
     "cqs": "~0.7.5",
     "teleportd": "~0.1.28"
   },
