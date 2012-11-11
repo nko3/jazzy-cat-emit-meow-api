@@ -12,13 +12,17 @@ var queries = [];
 var query = {
   str: 'hurricane sandy',
   size: 100,
-  from: 0
+  from: 0,
+  period: [LAST_SCRAPE || 0, +Date.now()]
 };
 
-queries.push(query);
+console.log(queries);
 
-queries.forEach(function(query) {
+
+function scrapeTeleportd(query, from) {
+
   api.search(query, function(err, hits, total, took) {
     console.log("Search returned", arguments);
   });
-});
+
+}
