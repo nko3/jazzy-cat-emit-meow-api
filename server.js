@@ -1,5 +1,6 @@
 var restify = require('restify'),
     bindRoutes = require('./routes'),
+    sugar = require('sugar'),
     version = require('./package').version;
 
 var server = restify.createServer({
