@@ -6,27 +6,58 @@ var models = require('../models'),
 
 // PUBLIC API DESCRIPTION  that's returned on GET /
 var commands = {
-  search: {
-    url: 'GET /search?:keyword1&:keyword2...',
-    description: 'Search for contributions by keyword. Here you can define as many keywords as you would like'
-  },
-  getContributions: {
-    url: 'GET /contribution',
-    description: 'returns all contributions'
-  },
-  getContributionsByKeyword: {
-    url: 'GET /contribution/:keyword',
-    description: 'return all contributions for the provided keyword. NOTE: Only a single keyword is accepted'
+  getKeywords: {
+    url: 'GET /keyword',
+    description: 'Retrieve all keywords that currently exist',
+    response_template: { 
+      name: 'cat',
+      count: '9001'
+    }
   },
   createContribution: {
     url: 'POST /contribution',
-    description: 'create a new contribution',
+    description: 'Create a new contribution',
     post_body_template: {
       keywords: "['keywrd1', 'keywrd two']",
       lat: 1.12313131,
       lng: -1.2112312,
       'meta': '{ JSON Object. This is an optional property }'
     }
+  },
+  getContributions: {
+    url: 'GET /contribution',
+    description: 'Retrieve all contributions',
+    response_template: [{
+      keywords: ['tacos', 'fast-food', 'mexican'],
+      lat: 122.22,
+      lng: -57.22
+    }, {
+      keywords: ['burritos', 'fast-food', 'mexican'],
+      lat: 102.22,
+      lng: -53.22
+    }, {
+      keywords: ['cat', 'meow'],
+      lat: 120.22,
+      lng: -51.22
+    }]
+  },
+  getContributionsByKeyword: {
+    url: 'GET /contribution/:keyword',
+    description: 'Retrieve all contributions which have the provided keyword.',
+    example_request: '/contribution/mexican',
+    response_template: [{
+      keywords: ['tacos', 'fast-food', 'mexican'],
+      lat: 122.22,
+      lng: -57.22
+    }, {
+      keywords: ['burritos', 'fast-food', 'mexican'],
+      lat: 102.22,
+      lng: -53.22
+    }]
+  // },
+  // search: {
+    // url: 'GET /search?:keyword1&:keyword2...',
+    // description: 'Search for contributions by keyword. Here you can define as many keywords as you would like'
   }
 };
 
