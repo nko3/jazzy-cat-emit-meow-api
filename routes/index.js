@@ -30,11 +30,14 @@ var commands = {
   }
 };
 
+
+// Route: GET /
 var getHelp = function(req, res, next) {
   res.send(commands);
   next();
 };
 
+// Route: GET /contribution
 var getContributions = function(req, res, next) {
   Contribution.all(function(err, contribs) {
     if (err) {
@@ -47,7 +50,7 @@ var getContributions = function(req, res, next) {
   });
 };
 
-
+// Route: GET /contribution/:keyword
 var getContributionsByKeyword = function(req, res, next) {
   var query = {},
       isMultiKeywordQuery = false,
@@ -77,7 +80,7 @@ var getContributionsByKeyword = function(req, res, next) {
   });
 };
 
-
+// Route: POST /contribution
 var postContribution = function(req, res, next) {
   Contribution.create(req.params, function(err, contrib) {
     if (err) {
@@ -90,9 +93,31 @@ var postContribution = function(req, res, next) {
   });
 };
 
+// Route: GET /keyword
+var getKeywords = function(req, res, next) {
+  Contribution.allKeywords(function(err, keywords) {
+    if (err) {
+      console.error("ERROR while retrieving all keywords", err);
+      next(err);
+    } else {
+      // Keywords are returned as an array of {key: keyword, value: count}
+      // objects.
+      keywords = keywords.map(function(obj) {
+        return {
+          name: obj.key,
+          count: obj.value
+        };
+      });
+      res.send(keywords);
+      next();
+    }
+  });
+};
 module.exports = function bindRoutes (server) {
   server.get('/', getHelp);
   server.get('/contribution', getContributions);
   server.get('contribution/:keyword', getContributionsByKeyword);
+  server.post('/contribution', postContribution);
+  server.get('/keyword', getKeywords);
   server.get('/search', getContributionsByKeyword);
 };

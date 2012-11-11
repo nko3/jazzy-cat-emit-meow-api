@@ -12,19 +12,13 @@ var resourceful = require('resourceful'),
 resourceful.use('couchdb',
   'couchdb://nodejitsudb7300738890.iriscouch.com:5984/testdb2');
 
-var Map = resourceful.define('map', function() {
-
-  this.string('name');
-
-  bindHooks(this);
-});
-
 var Contribution = resourceful.define('contribution', function() {
 
   this.number('lat');
   this.number('lng');
   this.array('keywords');
   this.object('meta');
+  this.timestamps();
 
   //this.parent('map');
 
@@ -75,9 +69,7 @@ var Contribution = resourceful.define('contribution', function() {
 */
 
 
-
 module.exports = {
-  Map: Map,
   Contribution: Contribution
 };
 
