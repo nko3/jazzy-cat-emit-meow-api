@@ -25,7 +25,7 @@ cqs.CreateQueue("mapper_message_queue", function(error, queue) {
 // each second.
 var mock = {};
 
-['send', 'recieve', 'delete'].forEach(function(method) {
+['send', 'receive', 'delete'].forEach(function(method) {
   mock[method] = function() {
     var args = arguments;
     // if the msg_q is loaded, use it
