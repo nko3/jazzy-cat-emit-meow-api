@@ -32,7 +32,7 @@ var Contribution = resourceful.define('contribution', function() {
     }
   });
 
-  // Creates a filter that returns an array of 
+  // Creates a filter that returns an array of
   // {keyword -> count} objects
   this.filter('allKeywords', {group: true}, {
     map: function(doc) {
