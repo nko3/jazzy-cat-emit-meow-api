@@ -1,6 +1,6 @@
 {
   "name": "nko3-jazzycat-emit-meow-api",
-  "version": "0.0.0-8",
+  "version": "0.0.0-9",
   "description": "Mapper-Maker API",
   "main": "app.js",
   "engines": {
